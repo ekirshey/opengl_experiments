@@ -23,4 +23,5 @@ find_package(GLEW)
 find_package(GLM)
 
 add_subdirectory(experiments/camera)
-#add_subdirectory(experiments/lighting)
+add_subdirectory(experiments/lighting)
+add_subdirectory(experiments/modelloading)

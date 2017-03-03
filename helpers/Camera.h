@@ -24,12 +24,16 @@ public:
 	}
 
 	void SetFov(int scroll) {
-		if (_fov >= 1.0f && _fov <= 90.0f)
+		if (_fov >= 1.0f && _fov <= 45.0f)
 			_fov -= scroll;
 		if (_fov <= 1.0f)
 			_fov = 1.0f;
-		if (_fov >= 90.0f)
-			_fov = 90.0f;
+		if (_fov >= 45.0f)
+			_fov = 45.0f;
+	}
+
+	glm::vec3 Position() {
+		return _cameraPos;
 	}
 
 	void Update(int xpos, int ypos, bool* keys) {
@@ -81,7 +85,7 @@ public:
 		return glm::lookAt(_cameraPos, _cameraPos + _cameraFront, _cameraUp);
 	}
 
-	GLfloat FOV() {
+	GLfloat Zoom() {
 		return _fov;
 	}
 

@@ -47,6 +47,35 @@ public:
 			return false;
 	}
 
+	int BuildNewProgram(std::string vertexfile, std::string fragmentfile, GLuint geometryid ) {
+		GLuint vertexid, fragmentid;
+		bool vertres = AddVertexShader(vertexid, vertexfile);
+		bool fragres = AddFragmentShader(fragmentid, fragmentfile);
+		if (!(vertres && fragres))
+			return -1;
+
+		GLuint newProgram = glCreateProgram();
+		// DEFAULTSHADER means, use default
+		if (vertexid != DEFAULTSHADER)
+			glAttachShader(newProgram, vertexid);
+		if ( fragmentid != DEFAULTSHADER)
+			glAttachShader(newProgram, fragmentid);
+		if (geometryid != DEFAULTSHADER)
+			glAttachShader(newProgram, geometryid);
+
+		bool link = LinkShaders(newProgram);
+		// delete shaders??
+		// probably but if i delete, can i reuse?
+		glDeleteShader(vertexid);
+		glDeleteShader(fragmentid);
+		if (link) {
+			shaderPrograms.push_back(ShaderProgram{ newProgram, vertexid, fragmentid, geometryid });
+			return shaderPrograms.size() - 1;
+		}
+		else
+			return -1;
+	}
+
 	int BuildNewProgram(GLuint vertexid, GLuint fragmentid, GLuint geometryid ) {
 		GLuint newProgram = glCreateProgram();
 		// DEFAULTSHADER means, use default

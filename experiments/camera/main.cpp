@@ -269,7 +269,7 @@ int main(int argc, char *argv[])
 
 		GLfloat time = GLfloat(SDL_GetTicks()) / 1000;
 		view = c.GetViewMatrix();
-		projection = glm::perspective(glm::radians(c.FOV()), (GLfloat)(screenWidth) / (GLfloat)(screenHeight), 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(c.Zoom()), (GLfloat)(screenWidth) / (GLfloat)(screenHeight), 0.1f, 100.0f);
 		GLint modelLoc = shader.GetUniformlocation(shaderprogram, "model");
 		//glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
